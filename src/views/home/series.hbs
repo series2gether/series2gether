@@ -4,14 +4,69 @@
             <div class="col-md-3">
                 <div class="card text-center">
                     <div class="card-body">
+                        {{#if ../isAdmin}}
+                       
+                        <a href="/home/series/edit/{{id}}" class="btn btn-primary bi-pencil-square" data-bs-toggle="modal" data-bs-target="#exampleModal"></a>
+                        <button type="button" data-bs-id="{{id}}" data-bs-name="{{name}}" class="btn btn-danger bi-trash-fill" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        </button>
+                        {{/if}}
                         <p class="m-2">{{name}}</p>
                          {{!--<iframe width="420" height="315"
                         src="https://www.youtube.com/embed/m7ccdln9MOI?autoplay=1">
                         </iframe>--}}
-                        <img src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2022/05/nuevo-poster-stranger-things-4-2700745.jpg?itok=JN3xb-GU" alt="" height="420" width="260"> 
+                        <img src="{{portada_url}}" alt="" height="420" width="260">
                     </div>
                 </div>
             </div>
+            {{else}}
+            No tv shows, want to add? Do it <a href="/links/add">here</a>!
         {{/each}}
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm delete?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        You are about to remove a TV Show from the page
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="/home/series/delete/{{id}}" class="btn btn-danger bi-trash-fill">Yes</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    const exampleModal = document.getElementById('exampleModal')
+    exampleModal.addEventListener('show.bs.modal', event => {
+    // Button that triggered the modal
+    const button = event.relatedTarget
+    console.log('button >> ', button);
+    // Extract info from data-bs-* attributes
+    const recipient = button.getAttribute('data-bs-id');
+    const name = button.getAttribute('data-bs-name');
+    console.log('recipient >> ', recipient);
+    // If necessary, you could initiate an AJAX request here
+    // and then do the updating in a callback.
+    //
+    // Update the modal's content.
+    const modalTitle = exampleModal.querySelector('.modal-title')
+    //const modalBodyInput = exampleModal.querySelector('.modal-body input')
+    const deleteButton = exampleModal.querySelector('.bi-trash-fill');
+    const message = exampleModal.querySelector('.modal-body');
+    message.innerHTML = `You are about to remove ${name} TV Show from the page`
+    console.log('deleteButton ', deleteButton);
+    deleteButton.href += recipient;
+
+    modalTitle.textContent = `Confirm delete ${name}?`
+});
+
+    
+</script>

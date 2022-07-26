@@ -10,14 +10,17 @@ router.get('/add', isLoggedIn, (req, res) => {
 });
 
 router.post('/add', isLoggedIn, async (req, res) => {
+    console.log('user> ', req.user);
+    const { username } = req.user;
     const {title, url, genre, year} = req.body;
     const newSerie = {
         name: title,
-        trailer: url,
-        year: year
+        portada_url: url,
+        year: year,
+        created_by: username,
+        modified_by: username
     };
     await pool.query('INSERT INTO series set ?', [newSerie]);
-    console.log(req.body);
     req.flash('success', 'TV Serie added successfully!');
     res.redirect('/home/');
 });

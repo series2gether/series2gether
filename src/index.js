@@ -21,6 +21,7 @@ app.engine('.hbs', exphbs.engine({
     layoutsDir: path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
     loginDir: path.join(app.get('views'), 'login'),
+    homeDir: path.join(app.get('views'), 'home'),
     extname: '.hbs',
     helpers: require('./lib/handlebars')
 }));
@@ -45,6 +46,13 @@ app.use((req, res, next) => {
     app.locals.error = req.flash('error');
     app.locals.user = req.user;
     console.log('locals.user >> ', app.locals.user);
+    if(app.locals.user != undefined) {
+        app.locals.isAdmin = req.user.profileId == 4 ;
+        console.log(app.locals.isAdmin);
+    } else {
+        app.locals.isAdmin = false;
+    }
+    
     next();
 });
 
