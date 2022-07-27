@@ -65,7 +65,7 @@ passport.use('local.signup', new LocalStrategy({
 						<p>Por favor haz click en el siguiente link, o copialo en la barra de direcciones de tu navegador
 						para completar el proceso de registro:</p>
 						<a href="${url}">${url}</a>
-						<img src="https://drive.google.com/file/d/1rJ__jSIJHa7gve6OT4PjYepNKLE8GQFu/view?usp=sharing"/>
+						<img src="https://i.ibb.co/9sPKfsp/sign.png"/>
 						<p><h3><b>Adogtame S.A.</b></h3><br/>
 						<b>Nuestro sitio web:</b> <a href="https://series2gether.herokuapp.com/">Series2gether Web</a><br/>
 						<b>Nuestras redes:</b> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c521.png" width="32" heigth="32"/>

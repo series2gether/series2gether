@@ -42,6 +42,10 @@ router.get('/verifySuccess', isNotLoggedIn, (req,res,next) => {
     res.render('user/verifySuccess');
 });
 
+router.get('/verifyPending', isNotLoggedIn, (req,res,next) => {
+    res.render('user/verifyPending');
+});
+
 router.get('/verify?:token', isNotLoggedIn, (req, res, next) => {
     console.log('Autenticando...');
     passport.authenticate('jwt', {
