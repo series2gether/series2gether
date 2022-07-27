@@ -28,7 +28,7 @@ router.get('/register', isNotLoggedIn, (req, res) => {
 });
 
 router.post('/register', passport.authenticate('local.signup', {
-        successRedirect: 'user/verifyPending',
+        successRedirect: '/verifyPending',
         failureRedirect: '/register',
         failureFlash: true
 }));
