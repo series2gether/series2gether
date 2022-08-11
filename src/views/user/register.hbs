@@ -1,9 +1,19 @@
 <div class="container p-4">
     <div class="col-md-4 mx-auto">
         <form action="/user/register" method="post">
+        
+        {{#if errorMsg}}
+            <p style="color:red; text-align:center">{{errorMsg}}</p>
+        {{/if}}
+        {{#each result}}
+        {{this.username}}
+        {{/each}}
+        </ul>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Username</label>
-            <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onchange="checkUserNameExists(this.value)">
+            <p id="alreadyUsername" style="color:red;display:none">username already in use</p>
+            <p id="availableUsername" style="color:green;display:none">username available</p>
             <div id="emailHelp" class="form-text">E.x.: Lullaby1234</div>
         </div>    
         <div class="mb-3">
@@ -27,3 +37,27 @@
         </form>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script type="text/javascript">
+    const usernames = {{{result}}};
+    //console.log(usernames);
+    const userNamesList = [];
+    for(var userName of usernames) {
+        userNamesList.push(userName.username);
+    }
+    //console.log(JSON.stringify(usernames[0].username));
+    //console.log(JSON.stringify("{{result}}"));
+    
+    function checkUserNameExists(username) {
+        if(userNamesList.includes(username)){
+            //alert('username already in use');
+            console.log('style display ', document.getElementById('alreadyUsername').style.display);
+            document.getElementById('alreadyUsername').style.display = 'block';
+            document.getElementById('availableUsername').style.display = 'none';
+        } else {
+            console.log('username available');
+            document.getElementById('availableUsername').style.display = 'block';
+            document.getElementById('alreadyUsername').style.display = 'none';
+        }
+    }
+</script>
