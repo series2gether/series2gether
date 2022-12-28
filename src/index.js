@@ -56,7 +56,25 @@ app.use((req, res, next) => {
     next();
 });
 
+/////////////////////////
+//Socket-io
+//////////////////////////
 
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+// turn off unnecessary header
+app.disable('x-powered-by');
+
+// turn on strict routing
+app.enable('strict routing');
+
+// use the X-Forwarded-* headers
+app.enable('trust proxy');
+
+app.set('socketio', io);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Routes
 app.use(require('./routes/'));
 app.use(require('./routes/authentication'));
@@ -69,6 +87,7 @@ app.use('/streaming', require('./routes/streaming'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Starting the server
-app.listen(app.get('port'), () => {
+// Se cambio app.listen `por http.listen
+http.listen(app.get('port'), () => {
     console.log('Server on port', app.get('port'));
 });
