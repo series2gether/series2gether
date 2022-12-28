@@ -686,8 +686,10 @@ io.on('connection', function(socket) {
   });
 });
 
-var server = http.listen(process.env.PORT || 3000, function() {
+/*var server = http.listen(process.env.PORT || 4000, function() {
   console.log('Listening on port %d.', server.address().port);
-});
+});*/
+
+var server = http.listen(3000);
 
 module.exports = router;
