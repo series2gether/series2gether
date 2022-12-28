@@ -10,24 +10,29 @@
         {{/each}}
         </ul>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Username</label>
-            <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onchange="checkUserNameExists(this.value)">
+            <label for="usernameInput" class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" id="usernameInput" aria-describedby="emailHelp" onchange="checkUserNameExists(this.value)" pattern="[a-zA-Z0-9]" required="true">
+            <p id="validationUsername" style="color:red"></p>
             <p id="alreadyUsername" style="color:red;display:none">username already in use</p>
             <p id="availableUsername" style="color:green;display:none">username available</p>
             <div id="emailHelp" class="form-text">E.x.: Lullaby1234</div>
         </div>    
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="emailInput" class="form-label">Email address</label>
+            <input type="email" name="email" class="form-control" id="emailInput" aria-describedby="emailHelp" onchange="validateEmail(this.value)">
+            <p id="validationEmail" style="color:red"></p>
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+            <label for="inputPassword" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="inputPassword" onchange="validatePassword(this.value)">
+            <p id="validationPassword" style="color:red"></p>
+            <div id="passwordHelp" class="form-text">Password must include at least 1 upper char, 1 number, and 1 special character.</div>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Repeat Password</label>
-            <input type="password" name="repassword" class="form-control" id="exampleInputPassword1">
+            <label for="repasswordInput" class="form-label">Repeat Password</label>
+            <input type="password" name="repassword" class="form-control" id="repasswordInput" onchange="validatePasswordMatch(this.value)">
+            <p id="validationRepassword" style="color:red"></p>
         </div>
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -49,15 +54,106 @@
     //console.log(JSON.stringify("{{result}}"));
     
     function checkUserNameExists(username) {
-        if(userNamesList.includes(username)){
-            //alert('username already in use');
-            console.log('style display ', document.getElementById('alreadyUsername').style.display);
-            document.getElementById('alreadyUsername').style.display = 'block';
-            document.getElementById('availableUsername').style.display = 'none';
+        document.getElementById('alreadyUsername').style.display = 'none';
+        document.getElementById('availableUsername').style.display = 'none';
+        var validationPass = true;
+        if(username.length < 4 || username.length > 16) {
+            document.getElementById('usernameInput').classList.add('is-invalid');
+            document.getElementById('validationUsername').innerHTML = 'Username must be between 4 and 16 characters';
+            document.getElementById('validationUsername').style.display = 'block';
+            validationPass = false;
+        } else if(/[^a-zA-Z0-9]/.test(username)) {
+            document.getElementById('usernameInput').classList.add('is-invalid');
+            document.getElementById('validationUsername').innerHTML = 'Only letters and numbers are allowed';
+            document.getElementById('validationUsername').style.display = 'block';
+            validationPass = false;
         } else {
-            console.log('username available');
-            document.getElementById('availableUsername').style.display = 'block';
-            document.getElementById('alreadyUsername').style.display = 'none';
+            console.log('else');
+            document.getElementById('usernameInput').classList.remove('is-invalid');
+            document.getElementById('usernameInput').classList.add('is-valid');
+            document.getElementById('validationUsername').innerHTML = '';
+            document.getElementById('validationUsername').style.display = 'none';
+            validationPass = true;
+        }
+
+        if(validationPass) {
+            if(userNamesList.includes(username)){
+                //alert('username already in use');
+                document.getElementById('usernameInput').classList.add('is-invalid');
+                console.log('style display ', document.getElementById('alreadyUsername').style.display);
+                document.getElementById('alreadyUsername').style.display = 'block';
+                document.getElementById('availableUsername').style.display = 'none';
+            } else {
+                console.log('username available');
+                document.getElementById('usernameInput').classList.remove('is-invalid');
+                document.getElementById('usernameInput').classList.add('is-valid');
+                document.getElementById('availableUsername').style.display = 'block';
+                document.getElementById('alreadyUsername').style.display = 'none';
+            }
+        }
+        
+    }
+    function validateEmail(email) {
+        var validationPass = true;
+        if(email.length < 10 || email.length > 80) {
+            document.getElementById('emailInput').classList.add('is-invalid');
+            document.getElementById('validationEmail').innerHTML = 'Email must be larger!';
+            document.getElementById('validationEmail').style.display = 'block';
+            validationPass = false;
+        } else if(!/[a-zA-Z0-9]+@[a-z]+.[a-z]+/.test(email)) {
+            document.getElementById('emailInput').classList.add('is-invalid');
+            document.getElementById('validationEmail').innerHTML = 'Invalid format email. Please check again!';
+            document.getElementById('validationEmail').style.display = 'block';
+            validationPass = false;
+        } else {
+            console.log('else');
+            document.getElementById('emailInput').classList.remove('is-invalid');
+            document.getElementById('emailInput').classList.add('is-valid');
+            document.getElementById('validationEmail').innerHTML = '';
+            document.getElementById('validationEmail').style.display = 'none';
+            validationPass = true;
+        }
+
+        if(validationPass) {
+        }
+        
+    }
+
+    function validatePassword(password) {
+        var validationPass = true;
+        if(password.length < 8 || password.length > 80) {
+            document.getElementById('inputPassword').classList.add('is-invalid');
+            document.getElementById('validationPassword').innerHTML = 'Password must be larger!';
+            document.getElementById('validationPassword').style.display = 'block';
+            validationPass = false;
+        } else if(!/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(password)) {
+            document.getElementById('inputPassword').classList.add('is-invalid');
+            document.getElementById('validationPassword').innerHTML = 'Your password must include 1 especial character';
+            document.getElementById('validationPassword').style.display = 'block';
+            validationPass = false;
+        } else {
+            console.log('else');
+            document.getElementById('inputPassword').classList.remove('is-invalid');
+            document.getElementById('inputPassword').classList.add('is-valid');
+            document.getElementById('validationPassword').innerHTML = '';
+            document.getElementById('validationPassword').style.display = 'none';
+            validationPass = true;
+        }
+
+        if(validationPass) {
+        }
+    }
+
+    function validatePasswordMatch(repassword) {
+        var password = document.getElementById('inputPassword').value;
+        if(password !== repassword) {
+            document.getElementById('repasswordInput').classList.add('is-invalid');
+            document.getElementById('validationRepassword').innerHTML = 'Passwords doesn\'t match!';
+        } else {
+            document.getElementById('repasswordInput').classList.remove('is-invalid');
+            document.getElementById('repasswordInput').classList.add('is-valid');
+            document.getElementById('validationRepassword').innerHTML = '';
+            document.getElementById('validationRepassword').style.display = 'none';
         }
     }
 </script>

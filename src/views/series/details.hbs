@@ -1,0 +1,52 @@
+<head>
+    {{!--STYLES--}}
+    <link type="text/css" href="css/styles.css">
+</head>
+<div class="background">
+    <!--<img src="{{series.image_background}}"/>-->
+
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3>{{series.name}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <div class="card text-center">
+                    <div class="card-head">
+                        <h3>Comentarios ({{counter}})</h3>
+                    </div>
+                    <div>
+                        {{#each commentaries}}
+                        <div class="card-header">
+                            {{username}}
+                        </div>
+                        <div class="card-body">
+                            {{description}}
+                        </div>
+                            
+                        {{/each}}
+                    </div>
+                    <form action="/home/series/addCommentary/{{series.id}}" method="POST">
+                        <div class="card-body">
+                            <textarea name="description" class="form-control"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-success btn-block">
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

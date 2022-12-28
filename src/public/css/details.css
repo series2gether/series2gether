@@ -1,0 +1,8 @@
+.background {
+    background-image: url('https://images3.alphacoders.com/882/882548.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 1000px;
+}
