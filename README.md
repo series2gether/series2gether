@@ -1,4 +1,8 @@
-### Hi there 👋
+### v1.2 UPDATE (28/12/2022)
+Added:
+-New validations in register form
+-New series description with redirection and comments section
+-New socket.io server connection
 
 <!--
 **series2gether/series2gether** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
