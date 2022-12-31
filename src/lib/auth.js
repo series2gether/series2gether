@@ -11,5 +11,12 @@ module.exports = {
             return next();
         }
         return res.redirect('/user/profile');
+    },
+
+    isAdmin(req, res, next) {
+        if(req.user.profileId === 4) {
+            return next();
+        }
+        return res.redirect('/user/login');
     }
 }

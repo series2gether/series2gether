@@ -80,6 +80,7 @@ app.use('/links',require('./routes/links'));
 app.use('/user', require('./routes/user'));
 app.use('/home', require('./routes/series'));
 app.use('/streaming', require('./routes/streaming')(io));
+app.use('/extension', require('./routes/extension'));
 
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
