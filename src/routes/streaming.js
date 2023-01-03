@@ -183,14 +183,17 @@ function padIntegerWithZeros(x, minWidth) {
 	return numStr;
 }
 
-function sendHeartbeat(){
-    setTimeout(sendHeartbeat, 8000);
-    io.sockets.emit('ping', { beat : 1 });
-}
 
-setTimeout(sendHeartbeat, 8000);
 
 module.exports = function(io) {
+	
+	function sendHeartbeat(){
+		setTimeout(sendHeartbeat, 8000);
+		io.sockets.emit('ping', { beat : 1 });
+	}
+	
+	setTimeout(sendHeartbeat, 8000);
+
 	io.on('connection', function (socket) {
 		console.log('socket >>> ', socket.id);
 		console.log('connection stablished.')
