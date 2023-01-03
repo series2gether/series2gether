@@ -199,6 +199,12 @@ module.exports = function(io) {
 			socket: socket,
 			typing: false
 		};
+
+		if(sessions.length > 0) {
+			console.log('session length > 0');
+			console.log('last session id >> ', sessions[sessions.length-1].id);
+			users[userId].sessionId = sessions[sessions.length-1].id
+		}
 		socket.emit('userId', userId);
 		console.log('User ' + userId + ' connected.');
 	
@@ -685,7 +691,7 @@ module.exports = function(io) {
 					delete users[userId];
 					console.log('User ' + userId + ' disconnected.' + reason);
 				}
-				
+				socket.connect();
 			
 		});
 	});
