@@ -183,6 +183,11 @@ function padIntegerWithZeros(x, minWidth) {
 	return numStr;
 }
 
+function sendHeartbeat(){
+    setTimeout(sendHeartbeat, 8000);
+    io.sockets.emit('ping', { beat : 1 });
+}
+
 module.exports = function(io) {
 	io.on('connection', function (socket) {
 		console.log('socket >>> ', socket.id);
@@ -199,12 +204,16 @@ module.exports = function(io) {
 			socket: socket,
 			typing: false
 		};
+		socket.on('pong', function(data){
+			console.log("Pong received from client");
+		});
 
-		console.log('sessions length: ', sessions.length);
-		if(sessions.length > 0) {
+		console.log('sessions length: ', Object.keys(sessions).length);
+		if(Object.keys(sessions).length > 0) {
 			console.log('session length > 0');
-			console.log('last session id >> ', sessions[sessions.length-1].id);
-			users[userId].sessionId = sessions[sessions.length-1].id
+			console.log('last session id >> ', Object.values(sessions)[Object.keys(sessions).length-1].id);
+			//sessions[Object.values(sessions)[Object.keys(sessions).length-1].id].userIds.push(userId); 
+			//users[userId].sessionId = Object.values(sessions)[Object.keys(sessions).length-1].id;
 		}
 		socket.emit('userId', userId);
 		console.log('User ' + userId + ' connected.');
