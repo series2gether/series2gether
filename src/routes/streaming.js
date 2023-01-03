@@ -188,6 +188,8 @@ function sendHeartbeat(){
     io.sockets.emit('ping', { beat : 1 });
 }
 
+setTimeout(sendHeartbeat, 8000);
+
 module.exports = function(io) {
 	io.on('connection', function (socket) {
 		console.log('socket >>> ', socket.id);
