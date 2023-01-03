@@ -670,16 +670,22 @@ module.exports = function(io) {
 		});
 	
 		socket.on('disconnect', function (reason) {
-			if (!users.hasOwnProperty(userId)) {
-				console.log('The socket received a message after it was disconnected.');
-				return;
+			if(reason === 'transport close') {
+				console.log('User ' + userId + ' reconnecting.' + reason);
+				socket.connect();
+			} else {
+				if (!users.hasOwnProperty(userId)) {
+					console.log('The socket received a message after it was disconnected.');
+					return;
+				}
+		
+				if (users[userId].sessionId !== null) {
+					leaveSession(true);
+				}
+				delete users[userId];
+				console.log('User ' + userId + ' disconnected.' + reason);
 			}
-	
-			if (users[userId].sessionId !== null) {
-				leaveSession(true);
-			}
-			delete users[userId];
-			console.log('User ' + userId + ' disconnected.' + reason);
+			
 		});
 	});
 	return router;
