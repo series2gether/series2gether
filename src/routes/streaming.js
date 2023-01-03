@@ -670,10 +670,7 @@ module.exports = function(io) {
 		});
 	
 		socket.on('disconnect', function (reason) {
-			if(reason === 'transport close') {
-				console.log('User ' + userId + ' reconnecting.' + reason);
-				socket.connect();
-			} else {
+
 				if (!users.hasOwnProperty(userId)) {
 					console.log('The socket received a message after it was disconnected.');
 					return;
@@ -684,7 +681,6 @@ module.exports = function(io) {
 				}
 				delete users[userId];
 				console.log('User ' + userId + ' disconnected.' + reason);
-			}
 			
 		});
 	});
