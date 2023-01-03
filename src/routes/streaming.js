@@ -200,6 +200,7 @@ module.exports = function(io) {
 			typing: false
 		};
 
+		console.log('sessions length: ', sessions.length);
 		if(sessions.length > 0) {
 			console.log('session length > 0');
 			console.log('last session id >> ', sessions[sessions.length-1].id);
