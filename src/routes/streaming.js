@@ -670,7 +670,8 @@ module.exports = function(io) {
 		});
 	
 		socket.on('disconnect', function (reason) {
-
+				console.log('DESCONECTADO ', reason);
+				console.log('SOCKET > ', socket);
 				if (!users.hasOwnProperty(userId)) {
 					console.log('The socket received a message after it was disconnected.');
 					return;
