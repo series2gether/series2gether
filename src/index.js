@@ -60,7 +60,7 @@ app.use((req, res, next) => {
 //Socket-io
 //////////////////////////
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var io = require('socket.io')(http, {pingInterval: 10, pingTimeout: 4000 });
 
 
 // turn off unnecessary header
