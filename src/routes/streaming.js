@@ -671,7 +671,7 @@ module.exports = function(io) {
 	
 		socket.on('disconnect', function (reason) {
 				console.log('DESCONECTADO ', reason);
-				console.log('SOCKET > ', socket);
+				console.log('SOCKET > ', socket.id);
 
 				if(!socket.id) {
 					if (!users.hasOwnProperty(userId)) {
