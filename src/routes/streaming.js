@@ -185,6 +185,7 @@ function padIntegerWithZeros(x, minWidth) {
 
 module.exports = function(io) {
 	io.on('connection', function (socket) {
+		console.log('socket >>> ', socket.id);
 		console.log('connection stablished.')
 		var userId = makeId();
 		console.log('userId > ', userId);
@@ -668,7 +669,7 @@ module.exports = function(io) {
 			}
 		});
 	
-		socket.on('disconnect', function () {
+		socket.on('disconnect', function (reason) {
 			if (!users.hasOwnProperty(userId)) {
 				console.log('The socket received a message after it was disconnected.');
 				return;
@@ -678,7 +679,7 @@ module.exports = function(io) {
 				leaveSession(true);
 			}
 			delete users[userId];
-			console.log('User ' + userId + ' disconnected.');
+			console.log('User ' + userId + ' disconnected.' + reason);
 		});
 	});
 	return router;
