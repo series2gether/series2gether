@@ -186,7 +186,7 @@ function padIntegerWithZeros(x, minWidth) {
 
 
 module.exports = function(io) {
-	
+
 	function sendHeartbeat(){
 		setTimeout(sendHeartbeat, 8000);
 		io.sockets.emit('ping', { beat : 1 });
@@ -690,7 +690,7 @@ module.exports = function(io) {
 			}
 		});
 	
-		socket.on('disconnect', function (reason) {
+		/*socket.on('disconnect', function (reason) {
 				console.log('DESCONECTADO ', reason);
 				console.log('SOCKET > ', socket.id);
 
@@ -706,7 +706,7 @@ module.exports = function(io) {
 					delete users[userId];
 					console.log('User ' + userId + ' disconnected.' + reason);
 				}			
-		});
+		});*/
 	});
 	return router;
 }
