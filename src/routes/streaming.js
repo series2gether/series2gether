@@ -690,9 +690,7 @@ module.exports = function(io) {
 					}
 					delete users[userId];
 					console.log('User ' + userId + ' disconnected.' + reason);
-				}
-				socket.connect();
-			
+				}			
 		});
 	});
 	return router;
