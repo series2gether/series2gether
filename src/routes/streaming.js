@@ -187,13 +187,6 @@ function padIntegerWithZeros(x, minWidth) {
 
 module.exports = function(io) {
 
-	function sendHeartbeat(){
-		setTimeout(sendHeartbeat, 8000);
-		io.sockets.emit('ping', { beat : 1 });
-	}
-	
-	setTimeout(sendHeartbeat, 8000);
-
 	io.on('connection', function (socket) {
 		console.log('socket >>> ', socket.id);
 		console.log('connection stablished.')
@@ -209,17 +202,7 @@ module.exports = function(io) {
 			socket: socket,
 			typing: false
 		};
-		socket.on('pong', function(data){
-			console.log("Pong received from client");
-		});
 
-		console.log('sessions length: ', Object.keys(sessions).length);
-		if(Object.keys(sessions).length > 0) {
-			console.log('session length > 0');
-			console.log('last session id >> ', Object.values(sessions)[Object.keys(sessions).length-1].id);
-			//sessions[Object.values(sessions)[Object.keys(sessions).length-1].id].userIds.push(userId); 
-			//users[userId].sessionId = Object.values(sessions)[Object.keys(sessions).length-1].id;
-		}
 		socket.emit('userId', userId);
 		console.log('User ' + userId + ' connected.');
 	
@@ -356,7 +339,8 @@ module.exports = function(io) {
 			}
 	
 			if (sessions.hasOwnProperty(data.sessionId)) {
-				sessions[data.sessionId].userIds.push(userId);
+				//Next line commented on 03-01-2023
+				//sessions[data.sessionId].userIds.push(userId);
 				users[userId].sessionId = data.sessionId;
 				console.log('User ' + userId + ' reconnected and rejoined session ' + users[userId].sessionId + '.');
 			} else {
@@ -690,11 +674,11 @@ module.exports = function(io) {
 			}
 		});
 	
-		/*socket.on('disconnect', function (reason) {
+		socket.on('disconnect', function (reason) {
 				console.log('DESCONECTADO ', reason);
 				console.log('SOCKET > ', socket.id);
 
-				if(!socket.id) {
+				if(!reason === 'transport close') {
 					if (!users.hasOwnProperty(userId)) {
 						console.log('The socket received a message after it was disconnected.');
 						return;
@@ -705,8 +689,8 @@ module.exports = function(io) {
 					}
 					delete users[userId];
 					console.log('User ' + userId + ' disconnected.' + reason);
-				}			
-		});*/
+				}
+		});
 	});
 	return router;
 }
