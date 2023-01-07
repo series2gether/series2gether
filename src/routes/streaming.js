@@ -361,6 +361,7 @@ module.exports = function(io) {
 				//sessions[data.sessionId].userIds.push(userId);
 				users[userId].sessionId = data.sessionId;
 				console.log('User ' + userId + ' reconnected and rejoined session ' + users[userId].sessionId + '.');
+				sendMessage('Reconnected', true);
 			} else {
 				var session = {
 					id: data.sessionId,
