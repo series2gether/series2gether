@@ -269,6 +269,7 @@ module.exports = function(io) {
 		};
 	
 		socket.on('reboot', function (data, fn) {
+			console.log('>>> REBOOT <<<<');
 			if (!users.hasOwnProperty(userId)) {
 				fn({ errorMessage: 'Disconnected.' });
 				console.log('The socket received a message after it was disconnected.');
