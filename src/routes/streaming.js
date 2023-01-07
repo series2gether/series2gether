@@ -186,6 +186,23 @@ function padIntegerWithZeros(x, minWidth) {
 
 
 module.exports = function(io) {
+	function sendHeartbeat(sessionId){
+		console.log('User disconnected, checking if session is empty in the next 30sec');
+		setTimeout(() =>{
+			console.log('Checking session emptyness');
+			var sessionIsEmpty = sessions[sessionId].socketIds.length;
+			if(sessionIsEmpty === 0) {
+				delete sessions[sessionId];
+				console.log('Session ' + sessionId + ' was deleted because there were no more users in it.');
+			} else {
+				console.log('Session is not empty');
+			}
+		}, 10000);
+		
+		return;
+	}
+	
+		
 
 	io.on('connection', function (socket) {
 		console.log('socket >>> ', socket.id);
@@ -269,6 +286,7 @@ module.exports = function(io) {
 		};
 	
 		socket.on('reboot', function (data, fn) {
+			console.log('>>> REBOOT <<<<');
 			if (!users.hasOwnProperty(userId)) {
 				fn({ errorMessage: 'Disconnected.' });
 				console.log('The socket received a message after it was disconnected.');
@@ -360,7 +378,8 @@ module.exports = function(io) {
 					state: data.state,
 					videoId: data.videoId,
 					host: data.host,
-					userIds: [userId]
+					userIds: [userId],
+					socketIds: [socket.id]
 				};
 				sessions[session.id] = session;
 				users[userId].sessionId = data.sessionId;
@@ -415,7 +434,8 @@ module.exports = function(io) {
 				state: 'paused',
 				userIds: [userId],
 				videoId: data.videoId,
-				host: data.host
+				host: data.host,
+				socketIds: [socket.id]
 			};
 			users[userId].sessionId = sessionId;
 			sessions[session.id] = session;
@@ -463,6 +483,7 @@ module.exports = function(io) {
 	
 			users[userId].sessionId = sessionId;
 			sessions[sessionId].userIds.push(userId);
+			sessions[sessionId].socketIds.push(socket.id);
 			sendMessage('joined', true);
 	
 			fn({
@@ -675,9 +696,9 @@ module.exports = function(io) {
 		});
 	
 		socket.on('disconnect', function (reason) {
-				console.log('DESCONECTADO ', reason);
-				console.log('SOCKET > ', socket.id);
+				console.log('User disconnected reason: ', reason);
 
+				//This is to avoid unintended disconnection
 				if(!reason === 'transport close') {
 					if (!users.hasOwnProperty(userId)) {
 						console.log('The socket received a message after it was disconnected.');
@@ -690,7 +711,21 @@ module.exports = function(io) {
 					delete users[userId];
 					console.log('User ' + userId + ' disconnected.' + reason);
 				}
+				//Send message anyways
+				sendMessage('left', true);
+				
+				//Get index of current socket
+				var socketIndex = sessions[users[userId].sessionId].socketIds.indexOf(socket.id);
+				
+				//Remove socket from session to identify later
+				sessions[users[userId].sessionId].socketIds.splice(socketIndex, 1);
+
+				//Get session id and send it to function
+				var sessionId = sessions[users[userId].sessionId].id;
+				sendHeartbeat(sessionId);
+					
 		});
 	});
+	
 	return router;
 }
