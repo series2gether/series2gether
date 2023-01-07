@@ -236,7 +236,7 @@ module.exports = function(io) {
 	
 			lodash.forEach(sessions[sessionId].userIds, function (id) {
 				if (id !== notToThisUserId) {
-					console.log('Sending presence to user ' + id + '.');
+					//*console.log('Sending presence to user ' + id + '.');
 					users[id].socket.emit('setPresence', {
 						anyoneTyping: anyoneTyping
 					});
@@ -697,7 +697,7 @@ module.exports = function(io) {
 		});
 	
 		socket.on('disconnect', function (reason) {
-				console.log('User disconnected reason: ', reason);
+				console.log('User ', userId, ' disconnected reason: ', reason);
 
 				//This is to avoid unintended disconnection
 				if(!reason === 'transport close') {
