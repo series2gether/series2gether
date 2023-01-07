@@ -269,7 +269,6 @@ module.exports = function(io) {
 		};
 	
 		socket.on('reboot', function (data, fn) {
-			console.log('>>> REBOOT <<<<');
 			if (!users.hasOwnProperty(userId)) {
 				fn({ errorMessage: 'Disconnected.' });
 				console.log('The socket received a message after it was disconnected.');
@@ -679,7 +678,7 @@ module.exports = function(io) {
 				console.log('DESCONECTADO ', reason);
 				console.log('SOCKET > ', socket.id);
 
-				//if(!reason === 'transport close') {
+				if(!reason === 'transport close') {
 					if (!users.hasOwnProperty(userId)) {
 						console.log('The socket received a message after it was disconnected.');
 						return;
@@ -690,7 +689,7 @@ module.exports = function(io) {
 					}
 					delete users[userId];
 					console.log('User ' + userId + ' disconnected.' + reason);
-				//}
+				}
 		});
 	});
 	return router;
