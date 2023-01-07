@@ -189,6 +189,8 @@ module.exports = function(io) {
 
 	io.on('connection', function (socket) {
 		console.log('socket >>> ', socket.id);
+
+		var socketIdBackup = socket.id;
 		console.log('connection stablished.')
 		var userId = makeId();
 		console.log('userId > ', userId);
@@ -677,8 +679,13 @@ module.exports = function(io) {
 		socket.on('disconnect', function (reason) {
 				console.log('DESCONECTADO ', reason);
 				console.log('SOCKET > ', socket.id);
+				console.log('socket backup > ', socketIdBackup);
 
-				if(!reason === 'transport close') {
+				setTimeout(() => {
+					console.log('socke.id ', socket.id);
+				}, 5000)
+
+				/*if(!reason === 'transport close') {
 					if (!users.hasOwnProperty(userId)) {
 						console.log('The socket received a message after it was disconnected.');
 						return;
@@ -689,7 +696,15 @@ module.exports = function(io) {
 					}
 					delete users[userId];
 					console.log('User ' + userId + ' disconnected.' + reason);
-				}
+				} else {
+					var sessionId = users[userId].sessionId;
+					setTimeout(() => {
+						if (sessions[sessionId].userIds.length === 0) {
+							delete sessions[sessionId];
+							console.log('Session ' + sessionId + ' was deleted because there were no more users in it.');
+						}
+					}, 10000);
+				}*/
 		});
 	});
 	return router;
