@@ -266,6 +266,17 @@ module.exports = function(io) {
 				});
 			});
 		};
+
+		socket.on('emojiReaction', function (data) {
+			//data should contain type of emoji
+
+			lodash.forEach(sessions[users[userId].sessionId].userIds, function (id) {
+				console.log('Sending emoji to user ' + id + '.');
+				users[id].socket.emit('emojiReaction', {
+					emoji: data.emoji
+				});
+			});
+		});
 	
 		// precondition: user userId is in a session
 		var leaveSession = function (broadcast) {
