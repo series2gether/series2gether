@@ -197,7 +197,7 @@ module.exports = function(io) {
 			} else {
 				console.log('Session is not empty');
 			}
-		}, 10000);
+		}, 60000);
 		
 		return;
 	}
@@ -248,30 +248,31 @@ module.exports = function(io) {
 		// precondition: body is a string
 		// precondition: isSystemMessage is a boolean
 		var sendMessage = function (body, isSystemMessage) {
-			var message = {
-				body: body,
-				isSystemMessage: isSystemMessage,
-				timestamp: new Date(),
-				userId: userId
-			};
-			sessions[users[userId].sessionId].messages.push(message);
-	
-			lodash.forEach(sessions[users[userId].sessionId].userIds, function (id) {
-				console.log('Sending message to user ' + id + '.');
-				users[id].socket.emit('sendMessage', {
-					body: message.body,
+			if(sessions[users[userId].sessionId].messages !== undefined) {
+				var message = {
+					body: body,
 					isSystemMessage: isSystemMessage,
-					timestamp: message.timestamp.getTime(),
-					userId: message.userId
+					timestamp: new Date(),
+					userId: userId
+				};
+				sessions[users[userId].sessionId].messages.push(message);
+		
+				lodash.forEach(sessions[users[userId].sessionId].userIds, function (id) {
+					console.log('Sending message to user ' + id + '.');
+					users[id].socket.emit('sendMessage', {
+						body: message.body,
+						isSystemMessage: isSystemMessage,
+						timestamp: message.timestamp.getTime(),
+						userId: message.userId
+					});
 				});
-			});
+			}
 		};
 
 		socket.on('emojiReaction', function (data) {
 			//data should contain type of emoji
 
 			lodash.forEach(sessions[users[userId].sessionId].userIds, function (id) {
-				console.log('Sending emoji to user ' + id + '.');
 				users[id].socket.emit('emojiReaction', {
 					emoji: data.emoji
 				});
