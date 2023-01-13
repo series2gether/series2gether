@@ -248,7 +248,7 @@ module.exports = function(io) {
 		// precondition: body is a string
 		// precondition: isSystemMessage is a boolean
 		var sendMessage = function (body, isSystemMessage) {
-			if(sessions[users[userId].sessionId].messages !== undefined) {
+			if(sessions[users[userId].sessionId] !== undefined) {
 				var message = {
 					body: body,
 					isSystemMessage: isSystemMessage,
