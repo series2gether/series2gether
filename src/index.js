@@ -81,6 +81,7 @@ app.use('/user', require('./routes/user'));
 app.use('/home', require('./routes/series'));
 app.use('/streaming', require('./routes/streaming')(io));
 app.use('/extension', require('./routes/extension'));
+app.use('/watchRoom', require('./routes/watchRoom'));
 
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
