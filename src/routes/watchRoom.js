@@ -11,7 +11,6 @@ const pool = require('../database');
 const { log } = require('console');
 
 router.get('/', isLoggedIn, isAdmin, async (req, res) => {
-
     let videoURL = req.query.video;
     res.render('watchRoom/watchRoom', {style: 'style.css', videoURL: videoURL });
 });

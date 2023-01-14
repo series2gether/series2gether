@@ -193,11 +193,11 @@ module.exports = function(io) {
 			var sessionIsEmpty = sessions[sessionId].socketIds.length;
 			if(sessionIsEmpty === 0) {
 				delete sessions[sessionId];
-				console.log('Session ' + sessionId + ' was deleted because there were no more users in it.');
+				console.log('>>>> Session ' + sessionId + ' was deleted because there were no more users in it.');
 			} else {
 				console.log('Session is not empty');
 			}
-		}, 60000);
+		}, 30000);
 		
 		return;
 	}
@@ -725,19 +725,22 @@ module.exports = function(io) {
 					delete users[userId];
 					console.log('User ' + userId + ' disconnected.' + reason);
 				}
-				//Send message anyways
-				sendMessage('left', true);
-				
-				//Get index of current socket
-				var socketIndex = sessions[users[userId].sessionId].socketIds.indexOf(socket.id);
-				
-				//Remove socket from session to identify later
-				sessions[users[userId].sessionId].socketIds.splice(socketIndex, 1);
 
-				//Get session id and send it to function
-				var sessionId = sessions[users[userId].sessionId].id;
-				sendHeartbeat(sessionId);
+				//Check if session still exists
+				if(sessions.hasOwnProperty([users[userId].sessionId])) {
+					//Send message anyways
+					sendMessage('left', true);
 					
+					//Get index of current socket
+					var socketIndex = sessions[users[userId].sessionId].socketIds.indexOf(socket.id);
+					
+					//Remove socket from session to identify later
+					sessions[users[userId].sessionId].socketIds.splice(socketIndex, 1);
+
+					//Get session id and send it to function
+					var sessionId = sessions[users[userId].sessionId].id;
+					sendHeartbeat(sessionId);
+				}	
 		});
 	});
 	
