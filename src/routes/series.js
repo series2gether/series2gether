@@ -2,8 +2,73 @@ const express = require('express');
 const router = express.Router();
 var expressHbs =  require('express-handlebars');
 const { isLoggedIn } = require('../lib/auth');
+// Import the `express-rate-limit` module
+const rateLimit = require("express-rate-limit");
 
 var hbs = expressHbs.create({});
+
+
+
+// Create a rate limiter that allows 100 requests per hour
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  max: 2, // limit each IP to 2 requests per windowMs
+  message: "Too many requests, please try again later"
+});
+
+// Apply the rate limiter to all routes
+//app.use(limiter);
+router.post('/series/addFavorites/:id', isLoggedIn, limiter, async (req, res) => {
+    try {
+        console.log('req.limited ', req.limited);
+        if (req.limited) {
+            throw new Error("Too many requests, please try again later");
+        }
+        const userId = req.user.id;
+        const { id } = req.params;
+        console.log('serie id > ', id);
+        var favorite = req.body;
+        console.log('favorite body > ', favorite);
+        const queryFavorite = await pool.query('SELECT * FROM favorites WHERE idUsuario = ? AND idSerie = ?', [userId, id]);
+        console.log('queryFavorite ', queryFavorite);
+
+        const newFavorite = {
+            idSerie: id,
+            idUsuario: userId
+        };
+        
+        if(queryFavorite.length == 0) {
+            const favoriteResult = await pool.query('INSERT INTO favorites set ?',[newFavorite]);
+            console.log('INSERTED IN DATABASE -- !');
+            res.send({
+                message: 'Added to favorites!'
+            });
+        } else {
+            const favoriteResult = await pool.query('DELETE FROM favorites WHERE idUsuario = ? AND idSerie = ?',[userId, Number(id)]);
+            console.log('DELETED FROM DATABASE -- !');
+            res.send({
+                message: 'Removed from favorites!'
+            });
+        }
+    } catch (error) {
+        if (error.statusCode === 429) {
+            console.log('error 429 muchas peticiones');
+            return res.status(429).send({
+            message: error.message
+            });
+        } else {
+            console.log('#2 error 429 muchas peticiones');
+            return res.status(500).send({
+            message: "Internal server error"
+            });
+        }
+    }
+    
+    
+    
+
+    
+});
 
 
 //Llamo para conectar la base
