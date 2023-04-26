@@ -3,6 +3,7 @@ const router = express.Router();
 var expressHbs =  require('express-handlebars');
 const { isLoggedIn, isAdmin } = require('../lib/auth');
 const url = require('url');
+const cors = require('cors');
 
 var hbs = expressHbs.create({});
 
