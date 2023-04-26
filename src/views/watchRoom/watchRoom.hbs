@@ -1,7 +1,7 @@
 
     <div class="embed-responsive embed-responsive-16by9" id="video-container">
         
-        <video id="myPlayer" src="{{videoURL}}" crossOrigin="anonymous" onmouseover="showNavBarControls('controls')" onmouseout="hideNavBarControls('controls')" onkeydown="playPauseVideo()"></video>
+        <video id="myPlayer" src="" crossOrigin="anonymous" onmouseover="showNavBarControls('controls')" onmouseout="hideNavBarControls('controls')" onkeydown="playPauseVideo()"></video>
         
         <div class="video-controls" id="video-controls" onmouseover="showNavBarControls('controls')" onmouseout="hideNavBarControls('controls')">
             <nav class="controls" id="controls">
@@ -105,7 +105,15 @@
     });
 
     //test hls player
-    var videoSourceURL = '{{{videoURL}}}';
+    //var videoSourceURL = '{{{videoURL}}}';
+    const params = new URLSearchParams(window.location.search);
+    const videoSrc = params.get('videoSrc');
+    video.src = videoSrc;
+
+
+    console.log(videoSrc);
+    console.log('m3u8 TRUE');
+   
     if(videoSourceURL.includes('m3u8')) {
         console.log('m3u8 TRUE');
         // Create a new instance of the HLS.js player
@@ -116,7 +124,7 @@
 
         console.log('{{{videoURL}}}');
         // Load the HLS manifest file
-        hls.loadSource('{{{videoURL}}}');
+        hls.loadSource(videoSrc);
     }
 
     function dummyFunction() {
