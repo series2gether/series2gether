@@ -28,8 +28,9 @@ router.get('/', isLoggedIn, isAdmin, async (req, res) => {
     // Proxy the request to the target server
     proxy.web(req, res, options, function (e) {
         console.log(e);
+        res.render('watchRoom/watchRoom', {style: 'style.css', videoURL: videoURL});
     });
-    res.render('watchRoom/watchRoom', {style: 'style.css', videoURL: videoURL});
+    
 });
 
 
