@@ -105,17 +105,13 @@
     });
 
     //test hls player
-    //var videoSourceURL = '{{{videoURL}}}';
-    const params = new URLSearchParams(window.location.search);
+    var videoSourceURL = '{{{videoURL}}}';
+    /*const params = new URLSearchParams(window.location.search);
     const videoSrc = params.get('videoSrc');
-    
-
-
-    console.log(videoSrc);
-    console.log('m3u8 TRUE');
+    console.log(videoSrc);*/
    
-    if(videoSrc.includes('m3u8') || videoSrc.includes('mega99')) {
-        video.src = videoSrc;
+    if(videoSourceURL.includes('m3u8') || videoSourceURL.includes('m40')) {
+        video.src = videoSourceURL;
         console.log('m3u8 TRUE, using HLS injection');
         // Create a new instance of the HLS.js player
         const hls = new Hls();
@@ -124,16 +120,16 @@
         hls.attachMedia(video);
 
         console.log('{{{videoURL}}}');
+
         // Load the HLS manifest file
-        hls.loadSource(videoSrc);
+        hls.loadSource('{{{videoURL}}}');
     } else {
-        video.src = videoSrc;
+        video.src = videoSourceURL;
     }
 
     function dummyFunction() {
         console.log('hello');
     }
-
 
     //Utility Functions
     function playPauseVideo() {
