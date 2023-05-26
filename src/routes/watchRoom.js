@@ -6,7 +6,7 @@ router.get('/', isLoggedIn, isAdmin, async (req, res) => {
 
 	const urlToPass = req.originalUrl;
 
-	const videoURL = urlToPass.replace('/watchRoom?videoSrc=', '');
+	const videoURL = urlToPass.replace(/\/watchRoom\?videoSrc=|&npSessionId=[\w\d]+/g, '');
 
 	res.render('watchRoom/watchRoom', { style: 'style.css', videoURL: videoURL });
 
