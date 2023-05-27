@@ -516,7 +516,8 @@ module.exports = function(io) {
 						body: message.body,
 						isSystemMessage: message.isSystemMessage,
 						timestamp: message.timestamp.getTime(),
-						userId: message.userId
+						userId: message.userId,
+						avatarId: "avatar1"
 					};
 				}),
 				ownerId: sessions[sessionId].ownerId,
