@@ -272,9 +272,9 @@ module.exports = function(io) {
 		};
 
 		//26-05-2023 Added Avatar logic
-		socket.on('changeAvatar'), function(data) {
+		socket.on('changeAvatar', function(data) {
 			users[data.sender].avatarId = data.avatarId;
-		}
+		});
 
 		socket.on('emojiReaction', function (data) {
 			//data should contain type of emoji
