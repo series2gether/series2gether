@@ -217,7 +217,8 @@ module.exports = function(io) {
 			id: userId,
 			sessionId: null,
 			socket: socket,
-			typing: false
+			typing: false,
+			avatarId: "avatar1" 
 		};
 
 		socket.emit('userId', userId);
@@ -263,11 +264,17 @@ module.exports = function(io) {
 						body: message.body,
 						isSystemMessage: isSystemMessage,
 						timestamp: message.timestamp.getTime(),
-						userId: message.userId
+						userId: message.userId,
+						avatarId: users[userId].avatarId
 					});
 				});
 			
 		};
+
+		//26-05-2023 Added Avatar logic
+		socket.on('changeAvatar'), function(data) {
+			users[data.sender].avatarId = data.avatarId;
+		}
 
 		socket.on('emojiReaction', function (data) {
 			//data should contain type of emoji
