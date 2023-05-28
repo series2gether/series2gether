@@ -1,7 +1,7 @@
 
     <div class="embed-responsive embed-responsive-16by9" id="video-container">
         
-        <video id="myPlayer" src="" crossOrigin="anonymous" onmouseover="showNavBarControls('controls')" onmouseout="hideNavBarControls('controls')" onkeydown="playPauseVideo()"></video>
+        <video id="myPlayer" tabindex="0" height="720" width="1280" src="" crossOrigin="anonymous" onmouseover="showNavBarControls('controls')" onmouseout="hideNavBarControls('controls')"></video>
         
         <div class="video-controls" id="video-controls" onmouseover="showNavBarControls('controls')" onmouseout="hideNavBarControls('controls')">
             <nav class="controls" id="controls">
@@ -100,7 +100,8 @@
         video.addEventListener('timeupdate', updateProgressBar);
        progressBar.addEventListener('change', setVideoProgressBar);
        volume.addEventListener('change', setVolumeBar);
-       videoContainer.addEventListener('keydown', dummyFunction);
+       //videoContainer.addEventListener('keydown', playPauseVideo);
+       video.addEventListener('keyup', playPauseVideo);
         
     });
 
@@ -132,7 +133,15 @@
     }
 
     //Utility Functions
-    function playPauseVideo() {
+    function playPauseVideo(event) {
+        console.log('video paused ? ', video.paused);
+        console.log('event ', event);
+
+        if(event.type == 'keyup') {
+            if(event.code != 'Space') {
+                return;
+            }
+        }
         if(video.paused){
             video.play();
             togglePlayPauseIcon();
