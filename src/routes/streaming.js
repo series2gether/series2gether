@@ -190,13 +190,18 @@ module.exports = function(io) {
 		console.log('User disconnected, checking if session is empty in the next 30sec');
 		setTimeout(() =>{
 			console.log('Checking session emptyness');
-			var sessionIsEmpty = sessions[sessionId].socketIds.length;
-			if(sessionIsEmpty === 0) {
-				delete sessions[sessionId];
-				console.log('>>>> Session ' + sessionId + ' was deleted because there were no more users in it.');
+			if(sessions[sessionId].socketIds != undefined) {
+				var sessionIsEmpty = sessions[sessionId].socketIds.length;
+				if(sessionIsEmpty === 0) {
+					delete sessions[sessionId];
+					console.log('>>>> Session ' + sessionId + ' was deleted because there were no more users in it.');
+				} else {
+					console.log('Session is not empty');
+				}
 			} else {
-				console.log('Session is not empty');
+				console.log('Session has been removed');
 			}
+			
 		}, 30000);
 		
 		return;
