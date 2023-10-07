@@ -1,209 +1,504 @@
 
-    <div class="embed-responsive embed-responsive-16by9" id="video-container">
-        
-        <video id="myPlayer" tabindex="0" height="720" width="1280" src="" crossOrigin="anonymous" onmouseover="showNavBarControls('controls')" onmouseout="hideNavBarControls('controls')"></video>
-        
-        <div class="video-controls" id="video-controls" onmouseover="showNavBarControls('controls')" onmouseout="hideNavBarControls('controls')">
-            <nav class="controls" id="controls">
-                <button class="btn button-play">
-                    <i class="buttonPlay">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play text-control" viewBox="0 0 16 16">
-                        <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/>
-                        </svg>
-                    </i>
-                    <div class="buttonPause hidden" style="display: none">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause text-control" viewBox="0 0 16 16">
-                        <path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
-                        </svg>
-                    </div>
-                    
-                </button>
-                <small class="timestamp text-control">0:00</small>
-                
-                <input type="range" min="0" max="100" step="0.1" value="0" class="progress">
-                <input type="range" min="0" max="100" step="0.1" value="100" class="volume">
-                
-                <button class="btn button-fullscreen" id="fullscreen-toggle-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fullscreen text-control" viewBox="0 0 16 16">
-                    <path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/>
-                    </svg>
-                </button>
-                
-            </nav>
-        </div>
-    </div>
+	<div class="embed-responsive embed-responsive-16by9" id="video-container">
+		<span class="videoContainer">
+		<video id="myPlayer" tabindex="0" height="720" width="1280" src="" crossOrigin="anonymous" onmouseover="showNavBarControls('video-controls')" onmouseout="hideNavBarControls('video-controls')"></video>
+		
+			<div class="video-controls" id="video-controls" onmouseover="showNavBarControls('video-controls')" onmouseout="hideNavBarControls('video-controls')">
+				<input type="range" min="0" max="100" step="0.1" value="0" class="progress range-input" id="range3">
+				<div class="snapshotContainer" id="snapshotContainer">
+					<img id="snapshotImg" src="" alt="" class="snapshotImage">
+					<div class="snapshotTime">
+						
+					</div>
+				</div>
+				<div class="controls">
+					<div class="controls-left">
+						<small class="timestamp text-control">0:00</small>
+						<div class="button-volume" id="volume-toggle-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-volume-down glow" viewBox="0 0 16 16">
+							
+							<path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
+							<path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
+							<path d="M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z"/>
+							</svg>
+						</div>
+						<input type="range" min="0" max="100" step="0.1" value="100" class="volume" onchange="setVolumeBar(this.value)" oninput="setVolumeBar(this.value)">
+					</div>
+					<div class="controls-center">
+						<div class="rewind" id="rewind" title="Retroceder 10 segundos">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise glow" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+							<path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+							</svg>
+						</div>
+						<div class="" id="button-play">
+							<i class="buttonPlay">
+								<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-play text-control glow" viewBox="0 0 16 16">
+								<path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/>
+								</svg>
+							</i>
+							<div class="buttonPause hidden" style="display: none">
+								<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-pause-fill text-control glow" viewBox="0 0 16 16">
+								<path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/>
+								</svg>
+							</div>
+						</div>
+						<div class="forward" id="forward" title="Adelantar 10 segundos">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise glow" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+							<path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+							</svg>
+						</div>
+					</div>
+					<div class="controls-right">
+						<div class="button-fullscreen" id="fullscreen-toggle-btn">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fullscreen text-control glow" viewBox="0 0 16 16">
+							<path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/>
+							</svg>
+						</div>
+					</div>
+				</div>
+			</div>
+		<video id="secondPlayer" tabindex="0" src=""></video>
+		</span><!--videoContainer-->
+	</div><!--video-container-->
 <style>
 
-    .button-play {
-        background: #000;
-    }
+	.button-play {
+		
+	}
 
-    #video-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 50px;
-    }
+	#video-container {
+		display: flex;
+		justify-content: center;
+		margin: 50px;
+	}
+	.videoContainer {
+		position: relative;
+	}
+	#video-controls {
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		padding: 19px;
+		background-image: linear-gradient(360deg, black, transparent);
+	}
 
-    .controls {
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-    }
+	#volume-toggle-icon {
+		display: flex;
+	}
 
-    .progress {
-        flex-grow: 1;
-    }
+	#volume-toggle-icon svg path {
+		transform: translateX(0);
+	}
 
-    .text-control {
-        color: white;
-    }
+	/*.range-input {
+		-webkit-appearance: none;
+		appearance: none;
+		background: transparent;
+		cursor: pointer;
+		width: 15rem;
+	}
 
-    #video-controls {
-        width: 90%;
-        position: absolute;
-        bottom: 0;
-    }
+	.range-input::-webkit-slider-runnable-track {
+		background: #053a5f;
+		height: 0.4rem;
+		
+	}
+	.range-input::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		
+	}*/
 
-    #video-container:fullscreen video {
-        height: 100vh;
-        width: 100vw;
-    }
-    #video-container:fullscreen .video-controls {
-        position: fixed;
-        bottom: 0;
-    }
+	input[type="range"] {
+		accent-color: rgb(31 143 118);
+	}
+
+	input[type="range"]::-webkit-slider-runnable-track {
+		cursor: pointer;
+	}
+	.controls {
+		color: white;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.controls-left {
+		display: flex;
+		align-items: center;
+		width: 45%;
+		gap: 10px;
+		margin-left: 10px;
+	}
+
+	.controls-center {
+		display: flex;
+		align-items: center;
+		gap: 80px;
+	}
+
+	.controls-right {
+		display: flex;
+		align-items: center;
+		width: 40%;
+		justify-content: flex-end;
+		margin-right: 10px;
+	}
+
+	.progress {
+		width: 100%;
+	}
+
+	.text-control {
+		color: white;
+	}
+
+	#secondPlayer {
+		display: none;
+	}
+
+	.snapshotContainer {
+		position: absolute;
+		display: block;
+		z-index: 1000;
+		width: 150px;
+		height: 80px;
+		background-color: white;
+		bottom: 90px;
+	}
+
+	#snapshotImg {
+		width: 150px;
+		height: 80px;
+	}
+
+	.snapshotTime {
+		text-align: center;
+	}
+
+	#video-container:fullscreen video {
+		height: 100vh;
+		width: 100vw;
+	}
+	#video-container:fullscreen .video-controls {
+		position: fixed;
+		bottom: 0;
+	}
+
+	#volume-toggle-icon, #forward, #rewind {
+		cursor: pointer;
+	}
+
+	.glow:hover {
+		color: rgb(48, 216, 180);
+		cursor: pointer;
+	}
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script type="text/javascript">
 
-    //GRAB DOM elements
-    const video = document.querySelector("video");
-    console.log('video >> ', video);
-    const playButton = document.querySelector(".button-play");
-    const progressBar = document.querySelector(".progress");
-    const timestamp = document.querySelector(".timestamp");
-    const navBarControls = document.getElementById("video-controls");
-    const volume = document.querySelector(".volume");
-    const videoContainer = document.getElementById("video-container");
-    //Listen for elements
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log('FULLSCREEN >>> ', document.getElementById('fullscreen-toggle-btn'));
-        var fullscreenButton = document.getElementById('fullscreen-toggle-btn');
-       fullscreenButton.addEventListener('click', toggleFullScreen);
-        
-       playButton.addEventListener('click', playPauseVideo);
-       video.addEventListener('click', playPauseVideo);
-        video.addEventListener('timeupdate', updateProgressBar);
-       progressBar.addEventListener('change', setVideoProgressBar);
-       volume.addEventListener('change', setVolumeBar);
-       //videoContainer.addEventListener('keydown', playPauseVideo);
-       video.addEventListener('keyup', playPauseVideo);
-        
-    });
+	let hoveredSecond;
+	//GRAB DOM elements
+	const video = document.querySelector("video");
+	const secondPlayer = document.getElementById("secondPlayer");
+	console.log('video >> ', video);
+	const playButton = document.querySelector("#button-play");
+	const progressBar = document.querySelector(".progress");
+	const timestamp = document.querySelector(".timestamp");
+	const navBarControls = document.getElementById("video-controls");
+	const volume = document.querySelector(".volume");
+	const videoContainer = document.getElementById("video-container");
+	const videoContainerTwo = document.getElementsByClassName("videoContainer")[0];
+	const snapshotImg = document.getElementById("snapshotImg");
+	const snapshotContainer = document.getElementById("snapshotContainer");
+	const volumeIcon = document.getElementById("volume-toggle-icon");
+	const rewind = document.getElementById("rewind");
+	const forward = document.getElementById("forward");
+	//Listen for elements
+	document.addEventListener('DOMContentLoaded', () => {
+		console.log('FULLSCREEN >>> ', document.getElementById('fullscreen-toggle-btn'));
+		var fullscreenButton = document.getElementById('fullscreen-toggle-btn');
+	
+		//video controls    
+		playButton.addEventListener('click', playPauseVideo);
+		//volume.addEventListener('drag', setVolumeBar);
+		volumeIcon.addEventListener('click', muteNUnmute);
+		fullscreenButton.addEventListener('click', toggleFullScreen);
 
-    //test hls player
-    var videoSourceURL = '{{{videoURL}}}';
-    /*const params = new URLSearchParams(window.location.search);
-    const videoSrc = params.get('videoSrc');
-    console.log(videoSrc);*/
-   
-    if(videoSourceURL.includes('m3u8') || videoSourceURL.includes('m40')) {
-        video.src = videoSourceURL;
-        console.log('m3u8 TRUE, using HLS injection');
-        // Create a new instance of the HLS.js player
-        const hls = new Hls();
+		//video
+		video.addEventListener('click', playPauseVideo);
+		video.addEventListener('timeupdate', updateProgressBar);
+		//videoContainer.addEventListener('keydown', playPauseVideo);
+		video.addEventListener('keyup', playPauseVideo);
 
-        // Attach the HLS.js player to the video element
-        hls.attachMedia(video);
+		//progressbar 
+		progressBar.addEventListener('change', setVideoProgressBar);
+		progressBar.addEventListener('mousemove', handleProgressBarHover);
+		progressBar.addEventListener('mouseout', handleProgressBarMouseout);
+		
+		rewind.addEventListener('click', rewindTenSeconds);
+		forward.addEventListener('click', forwardTenSeconds);
+			
+	});
 
-        console.log('{{{videoURL}}}');
+	//test hls player
+	var videoSourceURL = '{{{videoURL}}}';
+	/*const params = new URLSearchParams(window.location.search);
+	const videoSrc = params.get('videoSrc');
+	console.log(videoSrc);*/
 
-        // Load the HLS manifest file
-        hls.loadSource('{{{videoURL}}}');
-    } else {
-        video.src = videoSourceURL;
-    }
+	if(videoSourceURL.includes('m3u8') || videoSourceURL.includes('m40')) {
+		video.src = videoSourceURL;
+		console.log('m3u8 TRUE, using HLS injection');
+		// Create a new instance of the HLS.js player
+		const hls = new Hls();
 
-    function dummyFunction() {
-        console.log('hello');
-    }
+		// Attach the HLS.js player to the video element
+		hls.attachMedia(video);
+		hls.attachMedia(secondPlayer);
 
-    //Utility Functions
-    function playPauseVideo(event) {
-        console.log('video paused ? ', video.paused);
-        console.log('event ', event);
+		console.log('{{{videoURL}}}');
 
-        if(event.type == 'keyup') {
-            if(event.code != 'Space') {
-                return;
-            }
-        }
-        if(video.paused){
-            video.play();
-            togglePlayPauseIcon();
-        } else {
-            video.pause();
-            togglePlayPauseIcon();
-        }
-    }
+		// Load the HLS manifest file
+		hls.loadSource('{{{videoURL}}}');
+	} else {
+		video.src = videoSourceURL; //videoSourceURL;
+		secondPlayer.src = videoSourceURL;
+	}
 
-    function setVolumeBar() {
-        console.log('volume ', video.volume);
-        console.log('volume.value ', volume.value);
-        video.volume = volume.value / 100;
-    }
+	function dummyFunction() {
+		console.log('hello');
+	}
 
-    function showNavBarControls(id) {
-        document.getElementById(id).style.visibility = "visible";
-    }
-    function hideNavBarControls(id) {
-        document.getElementById(id).style.visibility = "hidden";
-    }
+	//Utility Functions
+	function playPauseVideo(event) {
+		console.log('video paused ? ', video.paused);
+		console.log('event ', event);
 
-    function togglePlayPauseIcon() {
-        if(video.paused){
-            document.querySelector('.buttonPause').setAttribute('style', 'display: none');
-            document.querySelector('.buttonPlay').setAttribute('style', 'display: block');
-        } else {
-            document.querySelector('.buttonPlay').setAttribute('style', 'display: none');
-            document.querySelector('.buttonPause').setAttribute('style', 'display: block');
-        }
-        
-    }
-    const toggleFullScreen = function () {
-        console.log('fullscreen clicked');
-        const container = document.getElementById('video-container');
-        const fullscreenApi = container.requestFullscreen
-            || container.webkitRequestFullScreen
-            || container.mozRequestFullScreen
-            || container.msRequestFullscreen;
-        if (!document.fullscreenElement) {
-            fullscreenApi.call(container);
-        }
-        else {
-            document.exitFullscreen();
-        }
-    }
+		if(event.type == 'keyup') {
+			if(event.code != 'Space') {
+				return;
+			}
+		}
+		if(video.paused){
+			video.play();
+			togglePlayPauseIcon();
+		} else {
+			video.pause();
+			togglePlayPauseIcon();
+		}
+	}
 
-    function setVideoProgressBar() {
-        video.currentTime = (progressBar.value * video.duration) / 100;
-    }
+	function rewindTenSeconds() {
+		console.log('clicked');
+		video.currentTime = video.currentTime - 10;
+	}
 
-    function updateProgressBar() {
-        progressBar.value = (video.currentTime / video.duration) * 100;
-        let minutes = Math.floor(video.currentTime / 60);
-        let seconds = Math.floor(video.currentTime % 60);
+	function forwardTenSeconds() {
+		video.currentTime = video.currentTime + 10;
+	}
 
-        if(minutes < 10) {
-            minutes = "0" + minutes;
-        } 
-        if (seconds < 10) {
-            seconds = "0" + seconds;
-        }
-        timestamp.textContent = `${minutes}` + ':' + `${seconds}`;
-    }
+	function setVolumeBar(newVal) {
+		console.log('volume ', video.volume);
+		console.log('volume.value ', volume.value);
+		console.log('volume.value type ', typeof volume.value);
+		let videoValue = parseFloat(volume.value);
+
+		console.log(videoValue);
+		if(videoValue < 20) {
+			//set icon vol 0
+			volumeIcon.getElementsByTagName("path")[0].setAttribute('d', '');
+			volumeIcon.getElementsByTagName("path")[1].setAttribute('d', '');
+			volumeIcon.getElementsByTagName("path")[2].setAttribute('d', 'M7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z');
+		} else if(videoValue < 50) {
+			volumeIcon.getElementsByTagName("path")[0].setAttribute('d', "");
+			volumeIcon.getElementsByTagName("path")[1].setAttribute('d', '');
+			volumeIcon.getElementsByTagName("path")[2].setAttribute('d', 'M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z');
+		} else if(videoValue < 80) {
+			volumeIcon.getElementsByTagName("path")[0].setAttribute('d', "");
+			volumeIcon.getElementsByTagName("path")[1].setAttribute('d', "M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z");
+			volumeIcon.getElementsByTagName("path")[2].setAttribute('d', "M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z");
+		} else {
+			console.log('volume > 80');
+			volumeIcon.getElementsByTagName("path")[0].setAttribute('d', "M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z");
+			volumeIcon.getElementsByTagName("path")[1].setAttribute('d', "M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z");
+			volumeIcon.getElementsByTagName("path")[2].setAttribute('d', "M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z");	
+			console.log('volume paths ', volumeIcon.getElementsByTagName("path"));
+		}
+		video.volume = volume.value / 100;
+	}
+
+	function muteNUnmute() {
+		console.log('video.muted ', video.muted);
+		video.muted = !video.muted;
+
+		if(video.muted) {
+			console.log('muted');
+			volumeIcon.getElementsByTagName("path")[0].setAttribute('d', "M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM6 5.04 4.312 6.39A.5.5 0 0 1 4 6.5H2v3h2a.5.5 0 0 1 .312.11L6 10.96V5.04zm7.854.606a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0z");
+			volumeIcon.getElementsByTagName("path")[1].setAttribute('d', '');
+			volumeIcon.getElementsByTagName("path")[2].setAttribute('d', '');
+			volumeIcon.style.color = "red";
+		} else {
+			console.log('unmuted');
+			volumeIcon.style.color = "white";
+			volumeIcon.getElementsByTagName("path")[0].setAttribute('d', "M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z");
+			volumeIcon.getElementsByTagName("path")[1].setAttribute('d', "M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z");
+			volumeIcon.getElementsByTagName("path")[2].setAttribute('d', "M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z");
+		}
+	}
+
+	let isFullscreen = false;
+
+	// Listen for fullscreen change event
+	document.addEventListener("fullscreenchange", () => {
+		isFullscreen = !isFullscreen;
+	});
+
+	function handleProgressBarMouseout(event) {
+		snapshotContainer.style.visibility = 'hidden';
+	}
+
+	function handleProgressBarHover(event) {
+		snapshotContainer.style.visibility = 'visible';
+		var snapshotTime = document.querySelector('.snapshotTime');
+		const duration = video.duration;
+		const mouseX = event.clientX - progressBar.getBoundingClientRect().left;
+		const percentage = (mouseX / progressBar.offsetWidth) * 100;
+		const previewTime = (percentage / 100) * duration;
+
+		let hours = Math.floor(previewTime / 3600);
+		var remainingSeconds = previewTime % 3600;
+		let minutes = Math.floor(remainingSeconds / 60);
+		let seconds = Math.floor(remainingSeconds % 60);
+		if(minutes < 10) {
+			minutes = "0" + minutes;
+		} 
+		if (seconds < 10) {
+			seconds = "0" + seconds;
+		}
+
+		if(hours > 0) {
+			snapshotTime.textContent = `${hours}`+':'+`${minutes}` + ':' + `${seconds}`;
+		} else {
+			snapshotTime.textContent = `${minutes}` + ':' + `${seconds}`;
+		}
+
+		secondPlayer.currentTime = previewTime;
+
+		shoot(secondPlayer);
+
+		// Calculate the position of the previewContainer relative to the cursor
+		const cursorX = event.clientX; //The pixel position X where mouse pointer is positioned
+		const containerWidth = snapshotContainer.offsetWidth; //Snapshot container width size in pixels
+
+		let leftOffset = cursorX - containerWidth / 2;
+		
+		if (!isFullscreen) {
+			//If is not in fullscreen mode then substract the portion between video element and parent container
+			leftOffset = leftOffset - videoContainerTwo.offsetLeft; //OffsetLeft: Es el espacio entre el elemento que dispara el evento y su elemento padre que lo contiene
+		}
+		// Set the position of the previewContainer
+		snapshotContainer.style.left = `${leftOffset}`+'px';
+	}
+
+	const shoot = (video) => {
+		let canvas = capture(video);
+		snapshotImg.src = canvas.toDataURL();
+		//setSnapshots(canvas.toDataURL())
+	}
+
+	const capture = (videoX) => {
+		let w = videoX.videoWidth;
+		let h = videoX.videoHeight;
+		let canvas = document.createElement("canvas");
+		canvas.width = w;
+		canvas.height = h;
+
+		let ctx = canvas.getContext("2d");
+
+		if(ctx) {
+			ctx.drawImage(videoX, 0, 0, w, h);
+		}
+
+		return canvas;
+	}
+
+	function showNavBarControls(id) {
+		document.getElementById(id).style.visibility = "visible";
+	}
+	function hideNavBarControls(id) {
+		document.getElementById(id).style.visibility = "hidden";
+	}
+
+	function togglePlayPauseIcon() {
+		if(video.paused){
+			document.querySelector('.buttonPause').setAttribute('style', 'display: none');
+			document.querySelector('.buttonPlay').setAttribute('style', 'display: block');
+		} else {
+			document.querySelector('.buttonPlay').setAttribute('style', 'display: none');
+			document.querySelector('.buttonPause').setAttribute('style', 'display: block');
+		}
+		
+	}
+	const toggleFullScreen = function () {
+		console.log('fullscreen clicked');
+		const container = document.getElementById('video-container');
+		const fullscreenApi = container.requestFullscreen
+			|| container.webkitRequestFullScreen
+			|| container.mozRequestFullScreen
+			|| container.msRequestFullscreen;
+		if (!document.fullscreenElement) {
+			fullscreenApi.call(container);
+		}
+		else {
+			document.exitFullscreen();
+		}
+	}
+
+	function setVideoProgressBar() {
+		video.currentTime = (progressBar.value * video.duration) / 100;
+	}
+
+	function updateProgressBar() {
+		progressBar.value = (video.currentTime / video.duration) * 100;
+		let hours = Math.floor(video.currentTime / 3600);
+		var remainingSeconds = video.currentTime % 3600;
+		let minutes = Math.floor(remainingSeconds / 60);
+		let seconds = Math.floor(remainingSeconds % 60);
+
+		var hoursTotal = Math.floor(video.duration / 3600);
+		var remainingSecondsTotal = video.duration % 3600;
+		let minutesTotal = Math.floor(remainingSecondsTotal / 60);
+		let secondsTotal = Math.floor(remainingSecondsTotal % 60);
+	
+		if(minutes < 10) {
+			minutes = "0" + minutes;
+		} 
+		if (seconds < 10) {
+			seconds = "0" + seconds;
+		}
+		if(minutesTotal < 10) {
+			minutesTotal = "0" + minutesTotal;
+		} 
+		if (secondsTotal < 10) {
+			secondsTotal = "0" + secondsTotal;
+		}
+
+		console.log('hours >>> ', hours);
+
+		if(hours > 0) {
+			timestamp.textContent = `${hours}`+':'+`${minutes}` + ':' + `${seconds}` + ' / '+`${hoursTotal}`+':'+`${minutesTotal}`+ ':' + `${secondsTotal}`;
+		} else {
+			if(hoursTotal > 0) {
+				timestamp.textContent = `${minutes}` + ':' + `${seconds}` + ' / '+`${hoursTotal}`+ ':'+`${minutesTotal}`+ ':' + `${secondsTotal}`;
+			} else {
+				timestamp.textContent = `${minutes}` + ':' + `${seconds}` + ' / '+`${minutesTotal}`+ ':' + `${secondsTotal}`;
+			}
+			
+		}
+	}
 </script>
