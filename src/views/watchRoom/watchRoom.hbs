@@ -197,6 +197,13 @@
 		cursor: pointer;
 	}
 
+	@media screen and (max-width: 1366px) and (max-height: 768px) {
+		video {
+			width: 950px;
+			height: 534px;
+		}
+	}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script type="text/javascript">
@@ -487,8 +494,6 @@
 		if (secondsTotal < 10) {
 			secondsTotal = "0" + secondsTotal;
 		}
-
-		console.log('hours >>> ', hours);
 
 		if(hours > 0) {
 			timestamp.textContent = `${hours}`+':'+`${minutes}` + ':' + `${seconds}` + ' / '+`${hoursTotal}`+':'+`${minutesTotal}`+ ':' + `${secondsTotal}`;
